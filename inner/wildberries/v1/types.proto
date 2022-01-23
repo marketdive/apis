@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+package marketdive.inner.wildberries.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+option go_package = "github.com/marketdive/apis/inner/wilberries/v1;wildberriespb";
+
+// Category of the product.
+message Category {
+  // ID of the category.
+  uint64 id = 1;
+  // Human-readable name of the category.
+  string human_name = 2;
+  // Name of the category.
+  string name = 3;
+  // Url of the category.
+  string page_url = 4;
+  // Shard key of the category.
+  string shard_key = 5;
+  // Query to filter products by this category.
+  string query = 6;
+  // Filter to filter products by this category.
+  string filter = 7;
+  // Url type of the category.
+  string url_type = 8;
+  // Parent category ID.
+  // Can be empty.
+  uint64 parent_id = 9;
+}
+
+// Subject of the product.
+message Subjects {
+  // ID of the subject.
+  uint64 id = 1;
+  // Name of the subject.
+  string name = 2;
+}
+
+// Brand of the product.
+message Brand {
+  // ID of the brand.
+  uint64 id = 1;
+  // ID of brand site.
+  uint64 site_id = 2;
+  // Name of the brand.
+  string name = 3;
+  // Flag, that shows if the brand is active.
+  bool active = 4;
+  // Flag, that shows if the brand is custom.
+  bool custom = 5;
+}
+
+// Price of the product.
+message Price {
+  // ID of the product.
+  uint64 product_id = 1;
+  // Basic price of the product.
+  double basic_price = 2;
+  // Promo price of the product.
+  double promo_price = 3;
+  // Date of the price.
+  google.protobuf.Timestamp created_at = 4;
+}
+
+// Product.
+message Product {
+  // ID of the product.
+  uint64 id = 1;
+  // Name of the product.
+  string name = 2;
+  // ID of the brand.
+  uint64 brand_id = 3;
+  // ID of the supplier.
+  uint64 supplier_id = 4;
+  // ID of the subject.
+  uint64 subject_id = 5;
+  // Name of the brand.
+  string brand_name = 6;
+  // Flag, that shows if the product is digital.
+  bool digital = 7;
+  // Flag, that shows if the product is video.
+  bool video = 8;
+  // Flag, that shows if the product have size.
+  bool have_size = 9;
+}
+
+// Full Info about the product.
+message ProductFull {
+  // ID of the product.
+  uint64 id = 1;
+  // Short info about the product.
+  map<string, google.protobuf.Any> short_info = 2;
+  // Full info about the product.
+  map<string, google.protobuf.Any> full_info = 3;
+}
+
+// StockInfo about the product.
+message StockInfo {
+  // ID of the product.
+  uint64 product_id = 1;
+  // Name of the stock.
+  string name = 2;
+  // Original name of the stock.
+  string original_name = 3;
+  // ID of the warehouse.
+  uint64 warehouse_id = 4;
+  // Quantity of the product.
+  uint64 quantity = 5;
+  // Date of the stock.
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+// Supplier of the product.
+message Supplier {
+  // ID of the supplier.
+  uint64 supplier_id = 1;
+  // NM id of the supplier.
+  uint64 nm_id = 2;
+  // Name of the supplier.
+  string name = 3;
+  // INN of the supplier.
+  string inn = 4;
+  // OGRN of the supplier.
+  string ogrn = 5;
+  // Legal address of the supplier.
+  string legal_address = 6;
+  // Trademark of the supplier.
+  string trademark = 7;
+  // Rv of the supplier.
+  uint64 rv = 8;
+}

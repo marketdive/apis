@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package marketdive.inner.wildberries.v1;
+
+import "inner/wildberries/v1/types.proto";
+
+option go_package = "github.com/marketdive/apis/inner/wilberries/v1;wildberriespb";
+
+
+// API service that provides access to Wildberries data.
+service Wildberries{
+  rpc GetCategoryList(GetCategoryListRequest) returns (GetCategoryListResponse) {}
+  rpc GetProductsList(GetProductsListRequest) returns (GetProductsListResponse) {}
+  rpc GetSupplier(GetSupplierInfoRequest) returns (GetSupplierInfoResponse) {}
+  rpc GetBrand(GetBrandInfoRequest) returns (GetBrandInfoResponse) {}
+  rpc GetProduct(GetProductInfoRequest) returns (GetProductInfoResponse) {}
+}
+
+// Payload for GetCategoryListRequest.
+message GetCategoryListRequest {
+  // Id of the parent category.
+  // If not set, then the root category is returned.
+  uint64 parent_id = 1;
+}
+
+// Response for GetCategoryListRequest.
+message GetCategoryListResponse {
+  // List of categories.
+  repeated Category category = 1;
+}
+
+// Payload for GetProductsListRequest.
+message GetProductsListRequest {
+  // Id of the category.
+  uint64 category_id = 1;
+  // Limit of the result.
+  uint32 limit = 2;
+  // Offset of the result.
+  uint32 offset = 3;
+}
+
+// Response for GetProductsListRequest.
+message GetProductsListResponse {
+  // List of products.
+  repeated Product product = 1;
+  // Total count of products.
+  uint32 total_count = 2;
+  // Current offset of the result.
+  uint32 offset = 3;
+  // Current limit of the result.
+  uint32 limit = 4;
+}
+
+// Payload for GetSupplierInfoRequest.
+message GetSupplierInfoRequest {
+  // Id of the supplier.
+  uint64 supplier_id = 1;
+}
+
+// Response for GetSupplierInfoRequest.
+message GetSupplierInfoResponse {
+  // Supplier info.
+  Supplier supplier = 1;
+}
+
+// Payload for GetBrandInfoRequest.
+message GetBrandInfoRequest {
+  // Id of the brand.
+  uint64 brand_id = 1;
+}
+
+// Response for GetBrandInfoRequest.
+message GetBrandInfoResponse {
+  // Brand info.
+  Brand brand = 1;
+}
+
+// Payload for GetProductInfoRequest.
+message GetProductInfoRequest {
+  // Id of the product.
+  uint64 product_id = 1;
+  // include full product description.
+  // if true, then full product description is returned.
+  bool include_full = 2;
+}
+
+// Response for GetProductInfoRequest.
+message GetProductInfoResponse {
+  // Product info.
+  Product product = 1;
+  // Full product description.
+  // Can be empty if include_full is false.
+  ProductFull product_full = 2;
+}
