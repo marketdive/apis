@@ -3,7 +3,7 @@ syntax = "proto3";
 package marketdive.inner.wildberries.v1;
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/marketdive/apis/inner/wilberries/v1;wildberriespb";
 
@@ -91,9 +91,9 @@ message ProductFull {
   // ID of the product.
   uint64 id = 1;
   // Short info about the product.
-  map<string, google.protobuf.Any> short_info = 2;
+  google.protobuf.Struct short_info = 2;
   // Full info about the product.
-  map<string, google.protobuf.Any> full_info = 3;
+  google.protobuf.Struct full_info = 3;
 }
 
 // StockInfo about the product.
