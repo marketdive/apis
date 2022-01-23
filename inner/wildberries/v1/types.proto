@@ -57,9 +57,9 @@ message Price {
   // ID of the product.
   uint64 product_id = 1;
   // Basic price of the product.
-  double basic_price = 2;
+  uint64 basic_price = 2;
   // Promo price of the product.
-  double promo_price = 3;
+  uint64 promo_price = 3;
   // Date of the price.
   google.protobuf.Timestamp created_at = 4;
 }
