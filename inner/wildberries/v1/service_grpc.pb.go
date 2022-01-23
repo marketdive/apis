@@ -23,6 +23,10 @@ type WildberriesClient interface {
 	GetSupplier(ctx context.Context, in *GetSupplierInfoRequest, opts ...grpc.CallOption) (*GetSupplierInfoResponse, error)
 	GetBrand(ctx context.Context, in *GetBrandInfoRequest, opts ...grpc.CallOption) (*GetBrandInfoResponse, error)
 	GetProduct(ctx context.Context, in *GetProductInfoRequest, opts ...grpc.CallOption) (*GetProductInfoResponse, error)
+	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
+	GetPriceHistory(ctx context.Context, in *GetPriceHistoryRequest, opts ...grpc.CallOption) (*GetPriceHistoryResponse, error)
+	GetStock(ctx context.Context, in *GetStockRequest, opts ...grpc.CallOption) (*GetStockResponse, error)
+	GetStockHistory(ctx context.Context, in *GetStockHistoryRequest, opts ...grpc.CallOption) (*GetStockHistoryResponse, error)
 }
 
 type wildberriesClient struct {
@@ -78,6 +82,42 @@ func (c *wildberriesClient) GetProduct(ctx context.Context, in *GetProductInfoRe
 	return out, nil
 }
 
+func (c *wildberriesClient) GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error) {
+	out := new(GetPriceResponse)
+	err := c.cc.Invoke(ctx, "/marketdive.inner.wildberries.v1.Wildberries/GetPrice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wildberriesClient) GetPriceHistory(ctx context.Context, in *GetPriceHistoryRequest, opts ...grpc.CallOption) (*GetPriceHistoryResponse, error) {
+	out := new(GetPriceHistoryResponse)
+	err := c.cc.Invoke(ctx, "/marketdive.inner.wildberries.v1.Wildberries/GetPriceHistory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wildberriesClient) GetStock(ctx context.Context, in *GetStockRequest, opts ...grpc.CallOption) (*GetStockResponse, error) {
+	out := new(GetStockResponse)
+	err := c.cc.Invoke(ctx, "/marketdive.inner.wildberries.v1.Wildberries/GetStock", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wildberriesClient) GetStockHistory(ctx context.Context, in *GetStockHistoryRequest, opts ...grpc.CallOption) (*GetStockHistoryResponse, error) {
+	out := new(GetStockHistoryResponse)
+	err := c.cc.Invoke(ctx, "/marketdive.inner.wildberries.v1.Wildberries/GetStockHistory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WildberriesServer is the server API for Wildberries service.
 // All implementations must embed UnimplementedWildberriesServer
 // for forward compatibility
@@ -87,6 +127,10 @@ type WildberriesServer interface {
 	GetSupplier(context.Context, *GetSupplierInfoRequest) (*GetSupplierInfoResponse, error)
 	GetBrand(context.Context, *GetBrandInfoRequest) (*GetBrandInfoResponse, error)
 	GetProduct(context.Context, *GetProductInfoRequest) (*GetProductInfoResponse, error)
+	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
+	GetPriceHistory(context.Context, *GetPriceHistoryRequest) (*GetPriceHistoryResponse, error)
+	GetStock(context.Context, *GetStockRequest) (*GetStockResponse, error)
+	GetStockHistory(context.Context, *GetStockHistoryRequest) (*GetStockHistoryResponse, error)
 	mustEmbedUnimplementedWildberriesServer()
 }
 
@@ -108,6 +152,18 @@ func (UnimplementedWildberriesServer) GetBrand(context.Context, *GetBrandInfoReq
 }
 func (UnimplementedWildberriesServer) GetProduct(context.Context, *GetProductInfoRequest) (*GetProductInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProduct not implemented")
+}
+func (UnimplementedWildberriesServer) GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPrice not implemented")
+}
+func (UnimplementedWildberriesServer) GetPriceHistory(context.Context, *GetPriceHistoryRequest) (*GetPriceHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPriceHistory not implemented")
+}
+func (UnimplementedWildberriesServer) GetStock(context.Context, *GetStockRequest) (*GetStockResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStock not implemented")
+}
+func (UnimplementedWildberriesServer) GetStockHistory(context.Context, *GetStockHistoryRequest) (*GetStockHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStockHistory not implemented")
 }
 func (UnimplementedWildberriesServer) mustEmbedUnimplementedWildberriesServer() {}
 
@@ -212,6 +268,78 @@ func _Wildberries_GetProduct_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wildberries_GetPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPriceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WildberriesServer).GetPrice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/marketdive.inner.wildberries.v1.Wildberries/GetPrice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WildberriesServer).GetPrice(ctx, req.(*GetPriceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wildberries_GetPriceHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPriceHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WildberriesServer).GetPriceHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/marketdive.inner.wildberries.v1.Wildberries/GetPriceHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WildberriesServer).GetPriceHistory(ctx, req.(*GetPriceHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wildberries_GetStock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WildberriesServer).GetStock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/marketdive.inner.wildberries.v1.Wildberries/GetStock",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WildberriesServer).GetStock(ctx, req.(*GetStockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wildberries_GetStockHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStockHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WildberriesServer).GetStockHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/marketdive.inner.wildberries.v1.Wildberries/GetStockHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WildberriesServer).GetStockHistory(ctx, req.(*GetStockHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wildberries_ServiceDesc is the grpc.ServiceDesc for Wildberries service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -238,6 +366,22 @@ var Wildberries_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProduct",
 			Handler:    _Wildberries_GetProduct_Handler,
+		},
+		{
+			MethodName: "GetPrice",
+			Handler:    _Wildberries_GetPrice_Handler,
+		},
+		{
+			MethodName: "GetPriceHistory",
+			Handler:    _Wildberries_GetPriceHistory_Handler,
+		},
+		{
+			MethodName: "GetStock",
+			Handler:    _Wildberries_GetStock_Handler,
+		},
+		{
+			MethodName: "GetStockHistory",
+			Handler:    _Wildberries_GetStockHistory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

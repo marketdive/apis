@@ -3,6 +3,7 @@ syntax = "proto3";
 package marketdive.inner.wildberries.v1;
 
 import "inner/wildberries/v1/types.proto";
+import "third_party/google/type/date.proto";
 
 option go_package = "github.com/marketdive/apis/inner/wilberries/v1;wildberriespb";
 
@@ -14,6 +15,10 @@ service Wildberries{
   rpc GetSupplier(GetSupplierInfoRequest) returns (GetSupplierInfoResponse) {}
   rpc GetBrand(GetBrandInfoRequest) returns (GetBrandInfoResponse) {}
   rpc GetProduct(GetProductInfoRequest) returns (GetProductInfoResponse) {}
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {}
+  rpc GetPriceHistory(GetPriceHistoryRequest) returns (GetPriceHistoryResponse) {}
+  rpc GetStock(GetStockRequest) returns (GetStockResponse) {}
+  rpc GetStockHistory(GetStockHistoryRequest) returns (GetStockHistoryResponse) {}
 }
 
 // Payload for GetCategoryListRequest.
@@ -91,4 +96,60 @@ message GetProductInfoResponse {
   // Full product description.
   // Can be empty if include_full is false.
   ProductFull product_full = 2;
+}
+
+// Payload for GetPriceRequest.
+message GetPriceRequest {
+  // Id of the product.
+  uint64 product_id = 1;
+}
+
+// Response for GetPriceRequest.
+message GetPriceResponse {
+  // Price info.
+  Price price = 1;
+}
+
+// Payload for GetPriceHistoryRequest.
+message GetPriceHistoryRequest {
+  // Id of the product.
+  uint64 product_id = 1;
+  // From date.
+  google.type.Date from = 2;
+  // To date.
+  google.type.Date to = 3;
+}
+
+// Response for GetPriceHistoryRequest.
+message GetPriceHistoryResponse {
+  // Price history.
+  repeated Price price_history = 1;
+}
+
+// Payload for GetStockRequest.
+message GetStockRequest {
+  // Id of the product.
+  uint64 product_id = 1;
+}
+
+// Response for GetStockRequest.
+message GetStockResponse {
+  // Stock info.
+  StockInfo stock = 1;
+}
+
+// Payload for GetStockHistoryRequest.
+message GetStockHistoryRequest {
+  // Id of the product.
+  uint64 product_id = 1;
+  // From date.
+  google.type.Date from = 2;
+  // To date.
+  google.type.Date to = 3;
+}
+
+// Response for GetStockHistoryRequest.
+message GetStockHistoryResponse {
+  // Stock history.
+  repeated StockInfo stock_history = 1;
 }
