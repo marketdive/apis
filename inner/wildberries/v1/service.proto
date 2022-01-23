@@ -3,7 +3,7 @@ syntax = "proto3";
 package marketdive.inner.wildberries.v1;
 
 import "inner/wildberries/v1/types.proto";
-import "third_party/google/type/date.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/marketdive/apis/inner/wilberries/v1;wildberriespb";
 
@@ -114,10 +114,10 @@ message GetPriceResponse {
 message GetPriceHistoryRequest {
   // Id of the product.
   uint64 product_id = 1;
-  // From date.
-  google.type.Date from = 2;
-  // To date.
-  google.type.Date to = 3;
+  // From timestamp.
+  google.protobuf.Timestamp from = 2;
+  // To timestamp.
+  google.protobuf.Timestamp to = 3;
 }
 
 // Response for GetPriceHistoryRequest.
@@ -142,10 +142,10 @@ message GetStockResponse {
 message GetStockHistoryRequest {
   // Id of the product.
   uint64 product_id = 1;
-  // From date.
-  google.type.Date from = 2;
-  // To date.
-  google.type.Date to = 3;
+  // From timestamp.
+  google.protobuf.Timestamp from = 2;
+  // To timestamp.
+  google.protobuf.Timestamp to = 3;
 }
 
 // Response for GetStockHistoryRequest.
